@@ -29,13 +29,14 @@ Simple engine which use canvas to draw shapes and brush strokes following mouse 
 ```
 
 #### Stop drawing: 
-###### (call it when not drawing for best performances)
 ```javascript
 
-    myDrawingTable.enable();
+    myDrawingTable.disable();
 
 
 ```
+###### (call it when not drawing for best performances)
+
 
 #### Testing:
 run index.html using VsCode LiveServer or another static server to test the project
