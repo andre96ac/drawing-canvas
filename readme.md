@@ -1,4 +1,4 @@
-# Table_Encryptor
+# Drawing-Canvas
 Simple engine which use canvas to draw shapes and brush strokes following mouse inputs.
 ##### The engine is really simple, so you can customize it as you wish. It's also possible to add custom brushes, see utils/Brushes.js for more info
 
