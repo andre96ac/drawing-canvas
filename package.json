@@ -1,0 +1,24 @@
+{
+  "name": "drawing-canvas",
+  "version": "1.0.0",
+  "description": "Simple engine which use canvas to draw shapes and brush strokes following mouse inputs. ",
+  "main": "CustomDraw.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andre96ac/drawing-canvas.git"
+  },
+  "keywords": [
+    "draw",
+    "drawing",
+    "canvas"
+  ],
+  "author": "Andrea Cuppini",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/andre96ac/drawing-canvas/issues"
+  },
+  "homepage": "https://github.com/andre96ac/drawing-canvas#readme"
+}
