@@ -19,6 +19,7 @@ export class Sheet{
     _selectedPaintDimension = 20;
     _selectedPaintColor = '#0015ff';
     _selectedPaintRotation = 0;
+    _isEnabled = false;
 
 
     //coda di elementi da renderizzare
@@ -43,6 +44,10 @@ export class Sheet{
         this._myCanvas.addEventListener('mousedown', this._startDraw)
         this._myCanvas.addEventListener('mousemove', this._draw)
         document.addEventListener('mouseup', this._endDraw)
+
+        this._myCanvas.addEventListener('pointerdown', this._startPenDraw)
+        this._myCanvas.addEventListener('pointermove', this._penDraw)
+        document.addEventListener('pointerup', this._endPenDraw)
 
 
         this._domParent.appendChild(this._myCanvas);
@@ -127,24 +132,59 @@ export class Sheet{
 
     //#region handlers
         _startDraw = (ev) => {
-            // ev.preventDefault()
-            this._addPointToQueue(ev);
-            this._isDrawing = true;
+            if(this._isEnabled){
+                // ev.preventDefault()
+                this._addPointToQueue(ev);
+                this._isDrawing = true;
+
+            }
         }
         
         _draw = (ev) => {
             // ev.preventDefault()
-            if(this._isDrawing){
+            if(this._isEnabled && this._isDrawing){
                 this._addPointToQueue(ev);
             }
         }
         
         _endDraw = (ev) => {
-            // ev.preventDefault()
-            this._addPointToQueue(ev);
-            this._isDrawing = false
+            if(this._isEnabled){
+                // ev.preventDefault()
+                this._addPointToQueue(ev);
+                this._isDrawing = false
+            }
         }
     //#endregion
+
+    //#region handlers Touch
+        _startPenDraw = (ev) => {
+            if(this._isEnabled){
+                ev.preventDefault()
+                ev.stopPropagation();
+                this._drawPoint(ev);
+                this._isDrawing = true;
+            }
+        }
+        
+        _penDraw = (ev) => {
+            if(this._isEnabled && this._isDrawing){
+                ev.preventDefault()
+                ev.stopPropagation();
+                this._drawPoint(ev);
+            }
+        }
+        
+        _endPenDraw = (ev) => {
+            if(this._isEnabled){
+                ev.preventDefault()
+                ev.stopPropagation();
+                this._drawPoint(ev);
+                this._isDrawing = false
+            }
+        }
+    //#endregion
+
+
     
     // //#region handlers per il sistema usando drawlines
     //     _startDraw = (ev) => {
@@ -205,10 +245,12 @@ export class Sheet{
 
         enable(){
             this._initQueueHandler();
+            this._isEnabled = true;
         }
 
         disable(){
-            clearInterval(this._timer)
+            clearInterval(this._timer);
+            this._isEnabled = false;
         }
         
         cancellaFoglio(){
